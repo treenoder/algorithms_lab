@@ -5,39 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func main() {
 	n, nums := input()
-	sort2(nums, n)
+	sort(nums, n)
 }
 
-func sort1(a []int64, n int) {
-	toPrint := make([]string, 0)
-	isSorted := true
-	for i := 1; i < n; i++ {
-		key := a[i]
-		j := i - 1
-		for j >= 0 && a[j] > key {
-			isSorted = false
-			a[j+1] = a[j]
-			j--
-		}
-		a[j+1] = key
-		numsStr := strings.Trim(strings.Join(strings.Split(fmt.Sprint(a), " "), " "), "[]")
-		toPrint = append(toPrint, numsStr)
-	}
-	if isSorted {
-		fmt.Println("The array is already sorted")
-		return
-	}
-	for _, s := range toPrint {
-		fmt.Println(s)
-	}
-}
-
-func sort2(a []int64, n int) {
+func sort(a []int64, n int) {
 	isSorted := true
 	for i := 1; i < n; i++ {
 		if a[i-1] > a[i] {
