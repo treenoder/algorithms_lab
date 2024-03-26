@@ -13,6 +13,19 @@ func main() {
 	fmt.Println(Solution(nums))
 }
 
+func input() (int, []string) {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Split(bufio.ScanWords)
+	scanner.Scan()
+	n, _ := strconv.Atoi(scanner.Text())
+	var nums []string
+	for i := 0; i < n; i++ {
+		scanner.Scan()
+		nums = append(nums, scanner.Text())
+	}
+	return n, nums
+}
+
 func Solution(a []string) string {
 	for i := 1; i < len(a); i++ {
 		if digitSum(a[i-1]) >= digitSum(a[i]) {
@@ -52,17 +65,4 @@ func digitSum(s string) int {
 		sign = ""
 	}
 	return sum
-}
-
-func input() (int, []string) {
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Split(bufio.ScanWords)
-	scanner.Scan()
-	n, _ := strconv.Atoi(scanner.Text())
-	var nums []string
-	for i := 0; i < n; i++ {
-		scanner.Scan()
-		nums = append(nums, scanner.Text())
-	}
-	return n, nums
 }
