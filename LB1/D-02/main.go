@@ -29,7 +29,6 @@ func Solution(index int) int64 {
 		}
 		if len(c) < index {
 			c = append(c, cube)
-			//j++
 		} else {
 			break
 		}
