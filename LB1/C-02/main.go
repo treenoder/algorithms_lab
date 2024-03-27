@@ -42,10 +42,7 @@ func Solution(a []string) string {
 }
 
 func toInt(s string) int {
-	n, err := strconv.Atoi(s)
-	if err != nil {
-		panic(err)
-	}
+	n, _ := strconv.Atoi(s)
 	return n
 }
 
