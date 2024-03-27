@@ -16,6 +16,6 @@ var inputs = []struct {
 
 func TestSolution(t *testing.T) {
 	for _, in := range inputs {
-		assert.Equal(t, in.result, Solution(in.nums))
+		assert.Equal(t, in.result, solution(in.nums))
 	}
 }

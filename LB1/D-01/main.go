@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -10,7 +11,7 @@ import (
 
 func main() {
 	_, nums := input()
-	//nums := []int{5, 4, 3, 2, 1}
+	//nums := []int{5, 4, 3, 2, 1, 5, 8, 9}
 	fmt.Println(Solution(nums))
 }
 
@@ -29,29 +30,47 @@ func input() (int, []int) {
 }
 
 func Solution(a []int) string {
-	sorted := qs(a, 0, len(a)-1)
-	return fmt.Sprintf("%v", strings.Trim(strings.Join(strings.Fields(fmt.Sprint(sorted)), " "), "[]"))
+	if !isSorted(a) {
+		shuffle(a)
+		quickSort(a, 0, len(a)-1)
+	}
+	return fmt.Sprintf("%v", strings.Trim(strings.Join(strings.Fields(fmt.Sprint(a)), " "), "[]"))
 }
 
-func part(a []int, low, high int) ([]int, int) {
+func quickSort(a []int, low, high int) {
+	if low < high {
+		p := partition(a, low, high)
+		quickSort(a, low, p-1)
+		quickSort(a, p+1, high)
+	}
+}
+
+func partition(a []int, low, high int) int {
 	pivot := a[high]
-	i := low
+	i := low - 1
+
 	for j := low; j < high; j++ {
 		if a[j] < pivot {
-			a[i], a[j] = a[j], a[i]
 			i++
+			a[i], a[j] = a[j], a[i]
 		}
 	}
-	a[i], a[high] = a[high], a[i]
-	return a, i
+
+	a[i+1], a[high] = a[high], a[i+1]
+	return i + 1
 }
 
-func qs(a []int, low, high int) []int {
-	if low < high {
-		var p int
-		a, p = part(a, low, high)
-		a = qs(a, low, p-1)
-		a = qs(a, p+1, high)
+func shuffle(a []int) {
+	rand.Shuffle(len(a), func(i, j int) {
+		a[i], a[j] = a[j], a[i]
+	})
+}
+
+func isSorted(a []int) bool {
+	for i := 1; i < len(a); i++ {
+		if a[i] < a[i-1] {
+			return false
+		}
 	}
-	return a
+	return true
 }
