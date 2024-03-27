@@ -10,7 +10,7 @@ import (
 
 func main() {
 	_, nums := input()
-	fmt.Println(Solution(nums))
+	fmt.Println(solution(nums))
 }
 
 func input() (int, []string) {
@@ -26,7 +26,7 @@ func input() (int, []string) {
 	return n, nums
 }
 
-func Solution(a []string) string {
+func solution(a []string) string {
 	for i := 1; i < len(a); i++ {
 		if digitSum(a[i-1]) >= digitSum(a[i]) {
 			for j := i; j > 0; j-- {
@@ -48,18 +48,15 @@ func toInt(s string) int {
 
 func digitSum(s string) int {
 	sum := 0
-	sign := ""
 	for _, ch := range s {
 		if ch == '-' {
-			sign = "-"
 			continue
 		}
-		digit, err := strconv.Atoi(sign + string(ch))
+		digit, err := strconv.Atoi(string(ch))
 		if err != nil {
 			panic(err)
 		}
 		sum += digit
-		sign = ""
 	}
 	return sum
 }
