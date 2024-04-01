@@ -9,13 +9,13 @@ import (
 
 func main() {
 	k := input()
-	fmt.Println(Solution(k))
+	fmt.Println(solution(k))
 	//for i := 1; i <= 20; i++ {
 	//	println(Solution(i))
 	//}
 }
 
-func Solution(index int) int64 {
+func solution(index int) int64 {
 	var sol int64
 	var count int
 	j := int64(1)
